@@ -8,7 +8,7 @@ const login = (req, res) => {
 
   const errors = req.validationErrors();
   if (errors) {
-    return res.send({
+    return res.status(400).send({
       message: 'Validation Failed',
       errors,
     });
@@ -16,19 +16,19 @@ const login = (req, res) => {
 
   User.findOne({ email: req.body.email.toLowerCase() }, (err, user) => {
     if (err) {
-      return res.send({
+      return res.status(500).send({
         message: 'Something bad happened :(',
         errors: err,
       });
     }
 
     if (!user) {
-      return res.send({ message: 'Invalid email or password.' });
+      return res.status(401).send({ message: 'Invalid email or password.' });
     }
 
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (err) {
-        return res.send({
+        return res.status(500).send({
           message: 'Something bad happened :(',
           errors: err,
         });
@@ -42,7 +42,7 @@ const login = (req, res) => {
         });
       }
 
-      return res.send({ message: 'Invalid email or password' });
+      return res.status(401).send({ message: 'Invalid email or password' });
     });
   });
 };
@@ -55,7 +55,7 @@ const signup = (req, res) => {
 
   const errors = req.validationErrors();
   if (errors) {
-    return res.send({
+    return res.status(400).send({
       message: 'Validation Failed',
       errors,
     });
@@ -71,19 +71,19 @@ const signup = (req, res) => {
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) {
-      return res.send({
+      return res.status(500).send({
         message: 'Something bad happened :(',
         errors: err,
       });
     }
 
     if (existingUser) {
-      return res.send({ message: 'Account with that email address already exists' });
+      return res.status(409).send({ message: 'Account with that email address already exists' });
     }
 
     user.save((err) => {
       if (err) {
-        return res.send({
+        return res.status(500).send({
           message: 'Something bad happened :(',
           errors: err,
         });
