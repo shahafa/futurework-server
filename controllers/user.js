@@ -37,12 +37,12 @@ const login = (req, res) => {
       if (isMatch) {
         const token = jwt.sign({ profile: user.profile }, process.env.JWT_SECRET, { expiresIn: '24h' });
         return res.send({
-          message: 'Login success.',
+          message: 'Login success',
           token,
         });
       }
 
-      return res.send({ message: 'Invalid email or password.' });
+      return res.send({ message: 'Invalid email or password' });
     });
   });
 };
@@ -78,7 +78,7 @@ const signup = (req, res) => {
     }
 
     if (existingUser) {
-      return res.send({ message: 'Account with that email address already exists.' });
+      return res.send({ message: 'Account with that email address already exists' });
     }
 
     user.save((err) => {
@@ -89,7 +89,11 @@ const signup = (req, res) => {
         });
       }
 
-      return res.send({ message: 'User signed up successfully.' });
+      const token = jwt.sign({ profile: user.profile }, process.env.JWT_SECRET, { expiresIn: '24h' });
+      return res.send({
+        message: 'Sign up success',
+        token,
+      });
     });
   });
 };
