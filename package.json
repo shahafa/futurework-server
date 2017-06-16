@@ -16,7 +16,8 @@
     "jsonwebtoken": "^7.4.1",
     "lusca": "^1.4.1",
     "mongoose": "^4.10.2",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
