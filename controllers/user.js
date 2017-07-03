@@ -63,10 +63,6 @@ const signup = (req, res) => {
     id: uuid(),
     email: req.body.email,
     password: req.body.password,
-    profile: {
-      email: req.body.email,
-    },
-    role: 'user',
   });
 
   try {
