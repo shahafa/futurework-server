@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
